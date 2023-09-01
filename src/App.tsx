@@ -1,14 +1,9 @@
 import './App.css'
-import Footer from './components/layout/Footer'
-import Header from "./components/layout/Header"
-
+import Home from './components/pages/Home'
 function App() {
   return (
     <>
-      <Header></Header>
-      <aside></aside>
-      <main></main>
-      <Footer></Footer>
+      <Home></Home>
     </>
   )
 }
