@@ -34,8 +34,8 @@ export default function Home() {
     <>
       <Header></Header>
       <aside></aside>
-      <main>
-        <div className="cardContainer">
+      <main className="p-10">
+        <div className="grid grid-cols-5 gap-8">
         {
           pokemons.map( poke => {
             return <PokemonCard pokemon={poke} key={poke.id} ></PokemonCard>
