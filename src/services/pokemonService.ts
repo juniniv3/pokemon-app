@@ -1,11 +1,12 @@
 import { Pokemon } from "@/models/Pokemon";
 import { PokemonBaseInfo, SearchResult } from "@/models/PokemonSearch";
 
-const BASE_URL = 'https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0';
+const BASE_URL = 'https://pokeapi.co/api/v2/pokemon';
 
-const fetchAllPokemons = async () => {
+const fetchAllPokemons = async (searchOffset?: number) => {
     try {
-        const response = await fetch(`${BASE_URL}`);
+        const finalURL: string = `${BASE_URL}?offset=${searchOffset}&limit=20`
+        const response = await fetch(finalURL);
         const jsonResponse: SearchResult = await response.json();
         return jsonResponse;
     } catch (error) {
@@ -23,10 +24,10 @@ async function fetchPokemon(pokemonBaseInfo: PokemonBaseInfo ): Promise<Pokemon>
     }
 }
 
-export async function getAllPokemons(): Promise<Pokemon[]> {
+export async function getAllPokemons(searchOffset?: number ): Promise<Pokemon[]> {
     const allPokemonsData: Pokemon[] = [];
     try {
-        const searchAllPokemonsResult = await fetchAllPokemons();
+        const searchAllPokemonsResult = await fetchAllPokemons(searchOffset);
         searchAllPokemonsResult.results.forEach(async pokemon => {
             const pokemonFullInfo = await fetchPokemon(pokemon);
             allPokemonsData.push(pokemonFullInfo);
