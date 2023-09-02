@@ -9,7 +9,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Pokemon } from "@/models/Pokemon";
 
-export default function PokemonCard({pokemon}:any) {
+export default function PokemonCard({pokemon}) {
     const poke:Pokemon = pokemon as Pokemon;
   return (
   <Card>
@@ -21,9 +21,8 @@ export default function PokemonCard({pokemon}:any) {
     </CardHeader>
     <CardContent>
         <div>
-
-        {poke.types.map(type =>{
-            return <Badge className="mr-2">{type.type.name}</Badge>
+        {poke.types.map((type, index) =>{
+            return <Badge className="mr-2" key={index+poke.name} >{type.type.name}</Badge>
         })}
         </div>
     

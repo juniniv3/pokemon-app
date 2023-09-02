@@ -3,6 +3,10 @@ interface Ability {
     url: string;
   }
   
+  interface Ability {
+    name: string;
+    url: string;
+  }
   interface Version {
     name: string;
     url: string;

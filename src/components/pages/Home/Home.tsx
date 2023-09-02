@@ -16,37 +16,40 @@ export default function Home() {
 
   async function getPokemons(searchOffset: number) {
     const pokemonList: Pokemon[] = await getAllPokemons(searchOffset);
-    addPokemonsToList(pokemonList);
+      addPokemonsToList(pokemonList);
   }
 
-  function addPokemonsToList(newPokemonsToAdd: Pokemon[]){
+  function addPokemonsToList(newPokemonsToAdd: Pokemon[]) {
     if (!pokemons.length) {
       setPokemons(newPokemonsToAdd);
       return;
     }
-    const mergePokemonList: Pokemon[] = [...pokemons , ...newPokemonsToAdd];    
+    const mergePokemonList: Pokemon[] = [...pokemons , ...newPokemonsToAdd];
+
     setPokemons(mergePokemonList);
     setOffset(offset + offsetBase);
   }
+
   useEffect(() => {
     if (offset === offsetBase) {
       getPokemons(offset);
     }
-  }, [pokemons]);
+  }, []);
   
   return (
     <>
       <Header></Header>
       <aside></aside>
-      <main className="p-10 bg-white dark:bg-black">
+      <main className="p-10">
       <Input type="text" placeholder="Search Pokemon" className="w-80 my-10 mt-14 dark:text-white" />
-        <div className="grid grid-cols-5 gap-8">
+        <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
         {
           pokemons.map( poke => {
             return <PokemonCard pokemon={poke} key={poke.id} ></PokemonCard>
           })
         }
         </div>
+        <p className="flex justify-center pt-8 dark:text-white text-xl" onClick={()=> {getPokemons(offset)}}><strong>Load more pokemons 👌</strong></p>
       </main>
       <Footer></Footer>
     </>

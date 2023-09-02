@@ -3,7 +3,7 @@ import { PokemonBaseInfo, SearchResult } from "@/models/PokemonSearch";
 
 const BASE_URL = 'https://pokeapi.co/api/v2/pokemon';
 
-const fetchAllPokemons = async (searchOffset?: number) => {
+const fetchAllPokemons = async (searchOffset?: number): Promise<SearchResult> => {
     try {
         const finalURL: string = `${BASE_URL}?offset=${searchOffset}&limit=20`
         const response = await fetch(finalURL);
@@ -27,11 +27,11 @@ async function fetchPokemon(pokemonBaseInfo: PokemonBaseInfo ): Promise<Pokemon>
 export async function getAllPokemons(searchOffset?: number ): Promise<Pokemon[]> {
     const allPokemonsData: Pokemon[] = [];
     try {
-        const searchAllPokemonsResult = await fetchAllPokemons(searchOffset);
-        searchAllPokemonsResult.results.forEach(async pokemon => {
+        const searchAllPokemonsResult: SearchResult = await fetchAllPokemons(searchOffset);
+        await Promise.all( searchAllPokemonsResult.results.map(async pokemon => {
             const pokemonFullInfo = await fetchPokemon(pokemon);
             allPokemonsData.push(pokemonFullInfo);
-        });
+        }))
         return allPokemonsData;
     } catch (error) {
         throw new Error('Fetching pokemons error');
