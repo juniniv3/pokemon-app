@@ -2,13 +2,11 @@ import {
     Card,
     CardContent,
     CardDescription,
-    CardFooter,
     CardHeader,
     CardTitle,
   } from "@/components/ui/card";
 
-  import { Badge } from "@/components/ui/badge";
-
+import { Badge } from "@/components/ui/badge";
 import { Pokemon } from "@/models/Pokemon";
 
 export default function PokemonCard({pokemon}:any) {
@@ -29,7 +27,6 @@ export default function PokemonCard({pokemon}:any) {
         })}
         </div>
     
-
         <div className = "grid grid-cols-3 mt-3">
             <div><strong>{poke.base_experience}</strong> XP</div>
             <div className="text-center"><strong>{poke.height * 10}</strong> CM</div>
@@ -37,9 +34,6 @@ export default function PokemonCard({pokemon}:any) {
         </div>
         
     </CardContent>
-    {/* <CardFooter>
-        <p>Card Footer</p>
-    </CardFooter> */}
     </Card>
   )
 }
