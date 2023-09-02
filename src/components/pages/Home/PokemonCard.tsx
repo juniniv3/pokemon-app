@@ -9,7 +9,8 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Pokemon } from "@/models/Pokemon";
 
-export default function PokemonCard({pokemon}) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export default function PokemonCard({pokemon}: any) {
     const poke:Pokemon = pokemon as Pokemon;
   return (
   <Card>
